@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Browse approved student marketplace listings across Islamabad." />
+    <title>Browse Products | UniMart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'marketplace.css' %}" />
+  </head>
+  <body class="catalog-page">
+    <div class="app-shell">
+      <header class="topbar catalog-topbar">
+        <a class="brand-block" href="/" aria-label="UniMart home">
+          <span class="brand-mark">U</span>
+          <span><span class="brand-name">UniMart</span><span class="brand-tag">Islamabad Student Marketplace</span></span>
+        </a>
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="/">Home</a>
+          <a class="active" href="/products/">Browse</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="secondary-button" href="/?auth=login">Log in</a>
+          <a class="primary-button" href="/?sell=1">Sell a product</a>
+        </div>
+      </header>
+
+      <main>
+        <section class="catalog-heading">
+          <div>
+            <p class="eyebrow">The campus marketplace</p>
+            <h1>Find your next useful thing.</h1>
+            <p class="catalog-intro">Explore approved products listed by the Islamabad university community.</p>
+          </div>
+          <div class="catalog-count"><strong id="catalogCount">0</strong><span>approved listings</span></div>
+        </section>
+
+        <section class="catalog-layout" aria-label="Product marketplace">
+          <aside class="filter-panel" aria-label="Filter products">
+            <div class="filter-heading"><h2>Refine</h2><button id="clearFilters" class="text-button" type="button">Clear all</button></div>
+            <label class="filter-label" for="searchInput">Search</label>
+            <input class="filter-control" id="searchInput" type="search" placeholder="Title or keyword" />
+            <label class="filter-label" for="categoryFilter">Category</label>
+            <select class="filter-control" id="categoryFilter"><option value="">All categories</option></select>
+            <label class="filter-label" for="conditionFilter">Condition</label>
+            <select class="filter-control" id="conditionFilter">
+              <option value="">Any condition</option>
+              <option value="new">New</option>
+              <option value="pre_loved">Pre-loved</option>
+            </select>
+            <label class="filter-label" for="universityFilter">University</label>
+            <select class="filter-control" id="universityFilter"><option value="">All universities</option></select>
+          </aside>
+
+          <section class="catalog-results" aria-live="polite">
+            <div class="catalog-results-heading"><div><p class="eyebrow">Curated for campus life</p><h2>Approved products</h2></div><label class="sort-label" for="sortFilter">Sort by<select id="sortFilter"><option value="recent">Recently added</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option></select></label></div>
+            <p class="demo-feed-notice" id="demoFeedNotice" hidden>Preview mode: sample products below are examples only, not real listings.</p>
+            <div id="productGrid" class="catalog-grid"><p class="loading-state">Loading products...</p></div>
+          </section>
+        </section>
+      </main>
+      <footer class="site-footer"><a href="/">UniMart</a><span>Thoughtful finds, closer to campus.</span></footer>
+    </div>
+    <script src="{% static 'products.js' %}" type="module"></script>
+  </body>
+</html>

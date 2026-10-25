@@ -1,0 +1,43 @@
+from django.urls import path
+
+from .views import (
+    api_create_product,
+    api_csrf,
+    api_catalog,
+    api_favorites,
+    api_login,
+    api_logout,
+    api_my_products,
+    api_products,
+    api_product_detail,
+    api_session,
+    api_signup,
+    api_toggle_favorite,
+    api_withdraw_product,
+    health_check,
+    home,
+    product_detail_page,
+    product_list_page,
+    verify_email,
+)
+
+urlpatterns = [
+    path('', home, name='home'),
+    path('health/', health_check, name='health_check'),
+    path('products/', product_list_page, name='product_list'),
+    path('products/<int:product_id>/', product_detail_page, name='product_detail'),
+    path('api/csrf/', api_csrf, name='api_csrf'),
+    path('api/session/', api_session, name='api_session'),
+    path('api/catalog/', api_catalog, name='api_catalog'),
+    path('api/products/', api_products, name='api_products'),
+    path('api/products/<int:product_id>/', api_product_detail, name='api_product_detail'),
+    path('api/products/create/', api_create_product, name='api_create_product'),
+    path('api/my-products/', api_my_products, name='api_my_products'),
+    path('api/favorites/', api_favorites, name='api_favorites'),
+    path('api/favorites/toggle/', api_toggle_favorite, name='api_toggle_favorite'),
+    path('api/my-products/<int:product_id>/withdraw/', api_withdraw_product, name='api_withdraw_product'),
+    path('api/signup/', api_signup, name='api_signup'),
+    path('api/login/', api_login, name='api_login'),
+    path('api/logout/', api_logout, name='api_logout'),
+    path('verify-email/<str:token>/', verify_email, name='verify_email'),
+]

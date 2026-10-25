@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="{{ product.title }} on UniMart" />
+    <title>{{ product.title }} | UniMart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'marketplace.css' %}" />
+  </head>
+  <body class="catalog-page">
+    <div class="app-shell">
+      <header class="topbar catalog-topbar">
+        <a class="brand-block" href="/" aria-label="UniMart home"><span class="brand-mark">U</span><span><span class="brand-name">UniMart</span><span class="brand-tag">Islamabad Student Marketplace</span></span></a>
+        <nav class="nav-links" aria-label="Main navigation"><a href="/">Home</a><a href="/products/">Browse</a></nav>
+        <div class="nav-actions"><a class="secondary-button" href="/?auth=login">Log in</a><a class="primary-button" href="/?sell=1">Sell a product</a></div>
+      </header>
+      <main class="detail-page">
+        <a class="back-link" href="/products/">&larr; Back to all products</a>
+        <article class="detail-layout">
+          <div class="detail-image-wrap">
+            {% if product.image_url %}<img src="{{ product.image_url }}" alt="{{ product.title }}" />{% else %}<div class="detail-image-fallback">UniMart<br />Campus finds</div>{% endif %}
+          </div>
+          <div class="detail-copy">
+            <div class="detail-tags"><span class="pill">{{ product.get_condition_display }}</span><span class="university-pill">{{ product.university.name|default:'Community listing' }}</span></div>
+            <p class="detail-category">{{ product.category.name }}</p>
+            <h1>{{ product.title }}</h1>
+            <p class="detail-price">PKR {{ product.price_pkr|floatformat:0 }}</p>
+            <div class="detail-divider"></div>
+            <h2>About this item</h2>
+            <p class="detail-description">{{ product.description|linebreaksbr }}</p>
+            <div class="seller-panel"><span class="seller-label">Listed by</span><strong>{{ product.seller.first_name|default:'UniMart Seller' }}</strong><span>{{ product.created_at|date:'j M Y' }}</span></div>
+            {% if seller_contact_email %}
+              <a class="primary-button contact-button" href="mailto:{{ seller_contact_email }}?subject=UniMart%20listing%3A%20{{ product.title|urlencode }}">Email seller</a>
+              <p class="detail-note">The seller chose to share their email with signed-in buyers for this listing. Arrange a safe exchange and never send payment before inspecting an item.</p>
+            {% elif request.user.is_authenticated %}
+              <button class="primary-button contact-button" type="button" disabled>Seller contact unavailable</button>
+              <p class="detail-note">This seller has not enabled email contact for this listing. Your account email remains private.</p>
+            {% else %}
+              <button class="primary-button contact-button" type="button" id="contactSellerButton">Contact seller</button>
+              <p class="detail-note">Sign in to see contact options when the seller has enabled them. Seller details are never shown publicly.</p>
+            {% endif %}
+          </div>
+        </article>
+      </main>
+      <footer class="site-footer"><a href="/">UniMart</a><span>Thoughtful finds, closer to campus.</span></footer>
+    </div>
+    <script src="{% static 'detail.js' %}" defer></script>
+  </body>
+</html>

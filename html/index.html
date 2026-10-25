@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="UniMart student marketplace" />
+    <title>UniMart | Student Marketplace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'marketplace.css' %}" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <div class="brand-mark">U</div>
+          <div>
+            <div class="brand-name">UniMart</div>
+            <div class="brand-tag">Islamabad Student Marketplace</div>
+          </div>
+        </div>
+
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="#home">Home</a>
+          <a href="/products/">Discover</a>
+          <a href="/?sell=1">Sell</a>
+          <a href="#favourites">Favourites</a>
+        </nav>
+
+        <div class="nav-actions" id="accountActions"></div>
+      </header>
+
+      <main>
+        <section class="hero" id="home">
+          <div class="hero-copy">
+            <span class="eyebrow">Verified student marketplace</span>
+            <h1>Buy and sell trusted campus essentials.</h1>
+            <p>
+              Discover pre-loved and new physical products across Islamabad universities, with safe
+              verification processes and admin-reviewed listings.
+            </p>
+            <div class="cta-row">
+              <a class="primary-button" href="/products/">Explore Listings</a>
+              <button class="secondary-button" type="button" id="openSellModalSecondary">List an Item</button>
+            </div>
+            <ul class="feature-list">
+              <li>University-aware discovery</li>
+              <li>Quick account setup for the local demo</li>
+              <li>Admin approval for all listings</li>
+            </ul>
+          </div>
+
+          <div class="hero-panel">
+            <div class="mini-card">
+              <span>Active listings</span>
+              <strong id="activeListingCount">0</strong>
+            </div>
+            <div class="mini-card accent">
+              <span>Participating universities</span>
+              <strong id="universitiesCount">0</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="toolbar" id="discover">
+          <div class="search-wrap">
+            <input
+              type="search"
+              id="searchInput"
+              placeholder="Search products or keywords"
+              aria-label="Search products"
+            />
+          </div>
+
+          <select id="categoryFilter">
+            <option value="All">All Categories</option>
+          </select>
+
+          <select id="universityFilter">
+            <option value="All Universities">All Universities</option>
+          </select>
+
+          <button class="secondary-button" type="button" id="clearFilters">Clear Filters</button>
+        </section>
+
+        <section class="content-grid">
+          <div class="products-panel">
+            <div class="section-header">
+              <h2>Approved listings</h2>
+              <span id="resultCount">0 items</span>
+            </div>
+            <p class="demo-feed-notice" id="demoFeedNotice" hidden>Preview mode: sample products below are examples only, not real listings.</p>
+            <div id="productGrid" class="product-grid"></div>
+          </div>
+
+          <aside class="sidebar" id="favourites">
+            <div class="sidebar-card">
+              <h3>Saved favourites</h3>
+              <ul id="favoritesList" class="favorites-list"></ul>
+            </div>
+
+            <div class="sidebar-card" id="sell">
+              <h3>My Listing Status</h3>
+              <ul id="myListings" class="status-list"></ul>
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <div id="modalContainer"></div>
+
+    <script src="{% static 'home.js' %}" type="module"></script>
+  </body>
+</html>
